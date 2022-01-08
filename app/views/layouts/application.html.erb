@@ -10,17 +10,36 @@
     <%= javascript_importmap_tags %>
   </head>
   <body>
-    <% if flash[:notice] %>
-      <div class="py-3 px-5 mb-4 bg-green-100 text-green-900 text-sm rounded-md border border-green-200">
-        <%= notice %>
-      </div>
-    <% end %>
-    <% if flash[:alert] %>
-      <div class="py-3 px-5 mb-5 bg-red-100 text-red-900 text-sm rounded-md border border-red-200">
-        <%= alert %>
-      </div>
-    <% end %>
-    <div class="w-full min-h-screen bg-gray-50 flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
+    <div class="w-full min-h-screen bg-gray-100 flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
+      <nav class="bg-gray-800 mt-0 fixed w-full z-10 top-0">
+        <div class="container mx-auto flex flex-wrap items-center p-2">
+          <div class="flex w-full md:w-1/2 justify-center md:justify-start text-white font-extrabold">
+            <a href="\" class="text-white no-underline hover:text-white hover:no-underline">
+              <div class="text-3xl pl-2">MembersOnly</div>
+            </a>
+          </div>
+          <div class="flex w-full p-2 content-center justify-between md:w-1/2 md:justify-end">
+            <ul class="list-reset flex justify-between flex-1 md:flex-none items-center">
+              <li class="mr-3">
+                <%= link_to 'Sign Up', new_user_registration_path, class: 'inline-block bg-white rounded-md text-gray-900 font-bold no-underline hover:text-white hover:bg-gray-600 hover:text-underline py-2 px-4' %>
+              </li>
+              <li class="mr-3">
+                <%= link_to 'Sign In', new_user_session_path, class: 'inline-block bg-white rounded-md text-gray-900 font-bold no-underline hover:text-white hover:bg-gray-600 hover:text-underline py-2 px-4' %>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <% if flash[:notice] %>
+          <div class="py-3 px-5 bg-green-200 text-green-900 text-sm border-b-2 border-green-600">
+            <%= notice %>
+          </div>
+        <% end %>
+        <% if flash[:alert] %>
+          <div class="py-3 px-5 bg-red-200 text-red-900 text-sm border-b-2 border-red-300">
+            <%= alert %>
+          </div>
+        <% end %>
+      </nav>
       <div class="w-full sm:max-w-md p-5 mx-auto">
         <%= yield %>
       </div>
