@@ -133,6 +133,7 @@ GEM
     marcel (1.0.2)
     method_source (1.0.0)
     mini_mime (1.1.2)
+    mini_portile2 (2.7.1)
     minitest (5.15.0)
     msgpack (1.4.2)
     multi_json (1.15.0)
@@ -153,6 +154,9 @@ GEM
       net-protocol
       timeout
     nio4r (2.5.8)
+    nokogiri (1.13.0)
+      mini_portile2 (~> 2.7.0)
+      racc (~> 1.4)
     nokogiri (1.13.0-x86_64-linux)
       racc (~> 1.4)
     notiffany (0.1.3)
@@ -205,9 +209,6 @@ GEM
       actionpack (>= 5.0)
       railties (>= 5.0)
     shellany (0.0.1)
-    simple_form (5.1.0)
-      actionpack (>= 5.2)
-      activemodel (>= 5.2)
     sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
       rack (> 1, < 3)
@@ -218,6 +219,8 @@ GEM
     stimulus-rails (1.0.2)
       railties (>= 6.0.0)
     strscan (3.0.1)
+    tailwindcss-rails (2.0.4)
+      railties (>= 6.0.0)
     tailwindcss-rails (2.0.4-x86_64-linux)
       railties (>= 6.0.0)
     thor (1.2.1)
@@ -240,6 +243,7 @@ GEM
     zeitwerk (2.5.3)
 
 PLATFORMS
+  ruby
   x86_64-linux
 
 DEPENDENCIES
@@ -253,7 +257,6 @@ DEPENDENCIES
   pg (~> 1.1)
   puma (~> 5.0)
   rails (~> 7.0.0)
-  simple_form
   sprockets-rails
   stimulus-rails
   tailwindcss-rails
