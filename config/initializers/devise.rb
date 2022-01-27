@@ -1,5 +1,25 @@
 # frozen_string_literal: true
 
+#
+# class TurboController < ApplicationController
+#   class Responder < ActionController::Responder
+#     def to_turbo_stream
+#       controller.render(options.merge(formats: :html))
+#     rescue ActionView::MissingTemplate => e
+#       if get?
+#         raise e
+#       elsif has_error? && default_action
+#         render rendering_options.merge(formats: :html, status: :unprocessable_entity)
+#       else
+#         redirect_to navigation_location
+#       end
+#     end
+#   end
+#
+#   self.responder = Responder
+#   respond_to :html, :turbo_stream
+# end
+
 # Assuming you have not yet modified this file, each configuration option below
 # is set to its default value. Note that some are commented out while others
 # are not: uncommented lines are intended to protect your configuration from
@@ -263,7 +283,7 @@ Devise.setup do |config|
   # should add them to the navigational formats lists.
   #
   # The "*/*" below is required to match Internet Explorer requests.
-  # config.navigational_formats = ['*/*', :html]
+  config.navigational_formats = ['*/*', :html, :turbo_stream]
 
   # The default HTTP method used to sign out a resource. Default is :delete.
   config.sign_out_via = :delete
@@ -300,7 +320,7 @@ Devise.setup do |config|
   # If your app is using Turbolinks, Turbolinks::Controller needs to be included to make redirection work correctly:
   #
   # ActiveSupport.on_load(:devise_failure_app) do
-  #   include Turbolinks::Controller
+  #  include Turbolinks::Controller
   # end
 
   # ==> Configuration for :registerable

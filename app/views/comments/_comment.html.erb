@@ -1,0 +1,28 @@
+<% if local_assigns[:parent]  %>
+  <div class='bg-white p-6 border-b-2 border-blue-300 sm:border-none sm:mx-10 sm:my-5 sm:rounded-lg flex flex-col shadow-2xl'>
+  <% else %>
+    <div class='ml-4 rounded-lg flex flex-col mt-4'>
+    <% end %>
+    <div class="flex flex-row text-sm">
+      <%= render comment.user %>
+      <div class="ml-4">replied: <%= comment.created_at.strftime('%H:%M:%S %d-%m-%y') %></div>
+    </div>
+    <div class="flex flex-col">
+      <div class="bg-blue-100 rounded-md my-1 p-4"><%= comment.body %></div>
+      <% if local_assigns[:links] %>
+        <div class="flex flex-row justify-between">
+          <ul class="flex flex-row w-full align-middle text-sm">
+            <li class=""><%= button_to 'view', comment, method: :get %></li>
+            <% if user_signed_in? %>
+              <li class="ml-2"><%= button_to 'reply', comment, method: :get %></li>
+            <% end %>
+            <% if user_signed_in? && current_user.id == comment.user_id %>
+              <li class=" ml-2"><%= button_to 'edit', edit_comment_url(comment), method: :get %></li>
+              <li class=" ml-2"><%= button_to 'delete', comment, method: :delete %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+    </div>
+    <%= render comment.comments, links: local_assigns[:links], children: true if local_assigns[:children] %>
+  </div>

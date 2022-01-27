@@ -1,4 +1,21 @@
 class Post < ApplicationRecord
   belongs_to :user
-  validates :body, presence: true, length: { minimum: 3 }
+
+  has_many :comments, as: :has_comment, dependent: :destroy
+
+  validates :body, presence: true
+
+  def post
+    self
+  end
+
+  def parent
+    false
+  end
+
+  def child_count
+    return 0 if comments.empty?
+
+    comments.count + comments.map(&:child_count).sum
+  end
 end

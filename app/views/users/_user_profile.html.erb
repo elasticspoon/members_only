@@ -1,0 +1,29 @@
+<div class="max-w-4xl flex items-center py-8 sm:py-20 flex-wrap mx-auto sm:my-32 lg:my-0">
+  <!--Main Col-->
+  <div id="profile" class="w-full lg:w-3/5 rounded-lg lg:rounded-l-lg shadow-2xl bg-white mx-6 lg:mx-0">
+    <div class="p-4 md:p-12 text-center lg:text-left">
+      <!-- Image for mobile view-->
+      <div class="block lg:hidden rounded-full shadow-xl mx-auto -mt-16 h-48 w-48 bg-cover bg-center" style="background-image: url(https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png')"></div>
+      <h1 class="text-3xl font-bold pt-8 lg:pt-0"><%= @user.name.capitalize %></h1>
+      <div class="mx-auto lg:mx-0 w-4/5 pt-3 border-b-2 border-green-500 opacity-25"></div>
+      <p class="pt-4 text-base font-bold flex items-center justify-center lg:justify-start">
+        <svg class="h-4 fill-current text-green-700 pr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9 12H1v6a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-6h-8v2H9v-2zm0-1H0V5c0-1.1.9-2 2-2h4V2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v1h4a2 2 0 0 1 2 2v6h-9V9H9v2zm3-8V2H8v1h4z"/></svg>
+        <%= @user.username %>
+      </p>
+      <p class="pt-2 flex flex-row items-center justify-center lg:justify-start text-xs lg:text-sm text-gray-600">
+        <svg class='h-4 fill-current text-green-700 pr-4' xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 512 512"><path d="M491,107a6,6,0,0,0-6-6H27a6,6,0,0,0-6,6V405a6,6,0,0,0,6,6H485a6,6,0,0,0,6-6ZM256,313.185,41.751,113H470.218Zm-79.508-57.657L33,390.622V121.455Zm8.792,8.311,66.62,62.2A6.019,6.019,0,0,0,260.1,326l69.146-64.522L470.474,399H41.829Zm152.743-10.675L479,121.426V390.343Z"></path></svg>
+        <%= @user.email %>
+      </p>
+      <p class="pt-8 text-sm">Totally optional short description about yourself, what you do and so on.</p>
+      <div class="pt-12 pb-8">
+        <%= button_to 'Follow', root_path, class: 'bg-green-700 hover:bg-green-900 text-white font-bold py-2 px-4 rounded-full' %>
+      </div>
+      <div class="mt-6 pb-16 lg:pb-0 w-4/5 lg:w-full mx-auto flex flex-wrap items-center justify-between">
+        social media links here
+      </div>
+    </div>
+  </div>
+  <div class="w-full lg:w-2/5">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png" class="rounded-none lg:rounded-r-lg shadow-2xl hidden lg:block">
+  </div>
+</div>

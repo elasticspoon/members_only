@@ -1,0 +1,11 @@
+<div class="bg-blue-400 w-full max-w-screen-lg">
+  <%= render 'user_profile', user: @user %>
+  <div class="bg-white mx-5 sm:mx-10 rounded-md p-6 sm:p-2 sm:py-8 shadow-2xl mb-4 sm:mb-16">
+    <div class="bg-white text-3xl font-bold sm:px-6 py-2 rounded-md">Posts by <%= @user.username %></div>
+    <%= render @user.posts, links: true, parent: true %>
+  </div>
+  <div class="bg-white mx-5 sm:mx-10 rounded-md p-6 sm:p-2 sm:py-8 shadow-2xl mb-4 sm:mb-16">
+    <div class="bg-white text-3xl font-bold sm:px-6 py-2 rounded-md">Comments by <%= @user.username %></div>
+    <%= render @user.comments, links: true, parent: true %>
+  </div>
+</div>

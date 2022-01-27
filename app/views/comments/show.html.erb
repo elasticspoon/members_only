@@ -1,0 +1,29 @@
+<%= content_for :col_left do %>
+  <%= render 'posts/banner_ad' unless user_signed_in? %>
+<% end %>
+<div class='bg-blue-400 w-full max-w-screen-lg min-h-screen'>
+  <div class="bg-blue-100 px-10 border-b-2 border-b-black py-6 pb-16">
+    <%= render @comment.post %>
+  </div>
+  <div class="bg-yellow-300 flex flex-col px-10 py-2 sm:mx-4 sm:rounded-b-lg sm:text-center">
+    <div class="">You are viewing a single comment's thread.</div>
+    <ul class='flex flex-row underline'>
+      <li class='mr-4'><%= link_to 'view post', post_path(@comment.post) %></li>
+      <li class='mr-4'><%= link_to 'view full thread', post_path(@comment.root) %></li>
+      <li class='mr-4'><%= link_to 'view parent', post_path(@comment.parent) %></li>
+    </ul>
+  </div>
+  <%= render @comment, parent: true %>
+  <%= render 'submit', parent: @comment if user_signed_in? %>
+  <%= render 'posts/submit_new_user' unless user_signed_in? %>
+  <% if @comment.comments.empty? %>
+    <%= render 'comments/no_comments' %>
+  <% else%>
+    <%= render @comment.comments, links: true, children: true, parent: true %>
+  <% end %>
+</div>
+<%= content_for :col_right do %>
+  <div class="hidden 2xl:block">
+    <%= render 'posts/banner_ad' unless user_signed_in? %>
+  </div>
+<% end %>

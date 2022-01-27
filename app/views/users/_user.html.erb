@@ -1,6 +1,6 @@
 <% if user_signed_in? %>
   <div class="">
-    <%= user.username %>
+    <%= link_to user.username, user_path(user) %>
   </div>
 <% else %>
   <div class="">????</div>

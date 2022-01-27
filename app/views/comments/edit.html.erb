@@ -4,21 +4,23 @@
 <div class='bg-blue-400 w-full max-w-screen-lg min-h-screen'>
   <div class='bg-white border-b-2 border-blue-400 sm:p-6 sm:mx-10 sm:my-5 sm:rounded-lg sm:border-none sm:shadow-2xl'>
     <div class="flex flex-row px-6 p-4 sm:p-0">
-      <%= render @post.user %>
-      <div class="ml-auto">posted: <%= @post.created_at.strftime('%H:%M:%S %d-%m-%y') %></div>
+      <%= render @comment.user %>
+      <div class="ml-4">posted: <%= @comment.created_at.strftime('%H:%M:%S %d-%m-%y') %></div>
     </div>
     <div class="flex flex-col">
       <div class="p-6 bg-green-200 sm:rounded-md sm:my-2">
-        <%= render 'edit', resource: @post %>
+        <%= render 'posts/edit', resource: @comment %>
       </div>
     </div>
   </div>
-  <% if @post.comments.empty? %>
+  <% if @comment.comments.empty? %>
     <%= render 'comments/no_comments' %>
   <% else%>
-    <%= render @post.comments, links: true, children: true, parent: true %>
+    <%= render @comment.comments, links: true, children: true, parent: true %>
   <% end %>
 </div>
 <%= content_for :col_right do %>
-  <%= render 'banner_ad' unless user_signed_in? %>
+  <div class="hidden 2xl:block">
+    <%= render 'posts/banner_ad' unless user_signed_in? %>
+  </div>
 <% end %>

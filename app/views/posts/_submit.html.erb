@@ -1,6 +1,7 @@
-<div class="bg-green-300 p-5 mx-10 my-5 rounded-lg h-48">
+<div class="bg-green-200 p-5 mt-8 border-b-2 border-green-400 sm:border-none sm:mx-10 sm:my-5 sm:rounded-lg min-h-fit sm:shadow-2xl">
   <%= form_with model: @post, class: 'w-full h-full flex flex-col' do |form| %>
-    <%= form.text_area :body, placeholder: 'Start a post...', autofocus: true, class: 'border-none w-full rounded-md h-full resize-none' %>
-    <%= form.submit value: nil, class: 'self-end bg-white p-2 mt-2 rounded-md border-2 border-transparent hover:border-2 hover:border-black w-fit' %>
+    <%= form.text_area :body, placeholder: 'Start a post...', rows: 5, autofocus: true, class: 'border-none w-full rounded-md h-full resize-none' %>
+    <%= render "devise/shared/error_messages", resource: @post %>
+    <%= form.submit 'Submit', class: 'self-end bg-white p-2 mt-2 rounded-md border-2 border-transparent hover:border-2 hover:border-black w-fit' %>
   <% end %>
 </div>

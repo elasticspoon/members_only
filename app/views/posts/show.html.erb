@@ -1,9 +1,16 @@
-<div class="bg-gray-200 flex flex-column w-full flex-1 justify-evenly">
-  <div class="bg-green-800 w-full max-w-xs">
-  </div>
-  <div class='bg-blue-400 flex-1 w-full max-w-screen-lg'>
-    <%= render @post %>
-  </div>
-  <div class="bg-green-800 w-full max-w-xs">
-  </div>
+<%= content_for :col_left do %>
+  <%= render 'banner_ad' unless user_signed_in? %>
+<% end %>
+<div class='bg-blue-400 w-full max-w-screen-lg min-h-screen'>
+  <%= render @post %>
+  <%= render 'comments/submit', parent: @post if user_signed_in? %>
+  <%= render 'submit_new_user'  unless user_signed_in? %>
+  <% if @post.comments.empty? %>
+    <%= render 'comments/no_comments' %>
+  <% else%>
+    <%= render @post.comments.filter {|c| !c.created_at.nil?}, links: true, children: true, parent: true %>
+  <% end %>
 </div>
+<%= content_for :col_right do %>
+  <%= render 'banner_ad' unless user_signed_in? %>
+<% end %>

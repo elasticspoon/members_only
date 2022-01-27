@@ -1,10 +1,10 @@
-<div class="bg-gray-200 flex flex-column w-full flex-1 justify-evenly">
-  <div class="bg-green-800 w-full max-w-xs">
-  </div>
-  <div class='bg-blue-400 flex-1 w-full max-w-screen-lg'>
-    <%= render 'submit' if user_signed_in? %>
-    <%= render @posts %>
-  </div>
-  <div class="bg-green-800 w-full max-w-xs">
-  </div>
+<%= content_for :col_left do %>
+  <%= render 'banner_ad' unless user_signed_in? %>
+<% end %>
+<div class='bg-blue-400 w-full max-w-screen-lg min-w-md min-h-screen'>
+  <%= render 'submit', resource: @post if user_signed_in? %>
+  <%= render @posts, links: true %>
 </div>
+<%= content_for :col_right do %>
+  <%= render 'banner_ad' unless user_signed_in? %>
+<% end %>

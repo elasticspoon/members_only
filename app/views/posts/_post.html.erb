@@ -1,16 +1,27 @@
-<div class='bg-white p-6 mx-10 my-5 rounded-lg'>
-  <%= render post.user %>
-  <div class="bg-blue-200 flex flex-col">
-    <div class=""><%= post.body %></div>
-    <div class="flex flex-row justify-between mx-5">
-      <ul class="flex flex-row">
-        <li class="border-gray-200"><%= button_to 'view', post, method: :get, class: 'bg-white' %></li>
-        <li class="border-gray-200"><%= button_to 'edit', edit_post_url(post), method: :get, class: 'bg-white' %></li>
-        <li class="border-gray-200"><%= button_to 'delete', post, method: :delete, class: 'bg-white' %></li>
-      </ul>
-      <div class="bg-green-100 w-fit">
-        <%= post.created_at %>
+<div class='bg-white p-4 lg:p-6 lg:mx-10 sm:my-5 border-b-2 border-blue-400 sm:border-none lg:rounded-lg shadow-2xl'>
+  <div class="flex flex-row">
+    <%= render post.user %>
+    <div class="ml-auto">posted: <%= post.created_at.strftime('%H:%M:%S %d-%m-%y') %></div>
+  </div>
+  <div class="flex flex-col">
+    <div class="p-6 bg-blue-100 lg:rounded-md my-2"><%= post.body %></div>
+    <% if local_assigns[:links] %>
+      <div class="flex flex-row justify-between ml-2">
+        <ul class="flex flex-row w-full align-middle text-sm">
+          <li class="w-fit underline">
+            <%= button_to post.child_count.to_s + ' comments', post, method: :get, class: 'underline text-sm' %>
+          </li>
+          <li class=" ml-2"><%= button_to 'view', post, method: :get %></li>
+          <li class=" ml-2"><%= button_to 'share', post, method: :get %></li>
+          <% if user_signed_in? %>
+            <li class=" ml-2"><%= button_to 'reply', post, method: :get %></li>
+          <% end %>
+          <% if user_signed_in? && current_user.id == post.user_id %>
+            <li class=" ml-2"><%= button_to 'edit', edit_post_url(post), method: :get %></li>
+            <li class=" ml-2"><%= button_to 'delete', post, method: :delete %></li>
+          <% end %>
+        </ul>
       </div>
-    </div>
+    <% end %>
   </div>
 </div>
