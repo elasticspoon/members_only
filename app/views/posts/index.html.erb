@@ -3,7 +3,8 @@
 <% end %>
 <div class='bg-blue-400 w-full max-w-screen-lg min-w-md min-h-screen'>
   <%= render 'submit', resource: @post if user_signed_in? %>
-  <%= render @posts, links: true %>
+  <%= render @posts, links: true  unless @posts.empty? %>
+  <%= render 'submit_new_user' if @posts.empty? %>
 </div>
 <%= content_for :col_right do %>
   <%= render 'banner_ad' unless user_signed_in? %>
