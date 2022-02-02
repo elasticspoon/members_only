@@ -9,8 +9,7 @@
     <div class="">You are viewing a single comment's thread.</div>
     <ul class='flex flex-row underline'>
       <li class='mr-4'><%= link_to 'view post', post_path(@comment.post) %></li>
-      <li class='mr-4'><%= link_to 'view full thread', post_path(@comment.root) %></li>
-      <li class='mr-4'><%= link_to 'view parent', post_path(@comment.parent) %></li>
+      <li class='mr-4'><%= link_to 'view parent', @comment.parent %></li>
     </ul>
   </div>
   <%= render @comment, parent: true %>

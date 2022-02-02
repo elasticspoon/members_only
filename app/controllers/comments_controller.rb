@@ -25,8 +25,10 @@ class CommentsController < ApplicationController
     @comment[:user_id] = current_user.id
 
     if @comment.save
-      redirect_to post_path(@comment.parent), notice: 'Comment created succesfully!' if @comment.parent.is_a?(Post)
-      redirect_to comment_path(@comment.parent), notice: 'Comment created succesfully!'
+      s_notice = 'Comment created succesfully!'
+      return redirect_to post_path(@comment.parent), notice: s_notice if @comment.parent.is_a?(Post)
+
+      redirect_to comment_path(@comment.parent), notice: s_notice
     else
       flash[:alert] = @comment.errors.full_messages
       render @comment.parent, status: :unprocessable_entity
@@ -40,6 +42,6 @@ class CommentsController < ApplicationController
   end
 
   def comment_params
-    params.require(:comment).permit(:body, :has_comment_id, :has_comment_type)
+    params.require(:comment).permit(:body, :parent_id, :parent_type, :post_id)
   end
 end
