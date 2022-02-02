@@ -1,32 +1,19 @@
 class Comment < ApplicationRecord
-  belongs_to :has_comment, polymorphic: true
+  belongs_to :parent, polymorphic: true
   belongs_to :user
+  belongs_to :post
 
-  has_many :comments, as: :has_comment, dependent: :destroy
+  has_many :comments, as: :parent, dependent: :destroy
 
-  validates :has_comment_id, presence: true
+  validates :parent_id, presence: true
   validates :user_id, presence: true
-  validates :body, presence: true 
-
-  def parent
-    has_comment
-  end
-
-  def post
-    return parent.post if parent
-
-    self
-  end
-
-  def root
-    return parent.root if parent.is_a?(Comment)
-
-    self
-  end
+  validates :post_id, presence: true
+  validates :body, presence: true
 
   def child_count
-    return 0 if comments.empty?
+    # return 0 if comments.empty?
 
-    comments.count + comments.map(&:child_count).sum
+    # comments.count + comments.map(&:child_count).sum
+    0
   end
 end
