@@ -4,7 +4,13 @@ class PostsController < ApplicationController
   # before_action :check_permitted_user, only: :show
 
   def index
-    @posts = Post.all.order('created_at DESC')
+    @posts = Post.select('posts.*,
+      (SELECT COUNT(comments.id)
+      FROM comments
+      WHERE comments.post_id = posts.id)
+      AS comment_count')
+                 .joins(:user).order('created_at DESC')
+
     @post = Post.new
   end
 
@@ -26,7 +32,12 @@ class PostsController < ApplicationController
   end
 
   def create
-    @posts = Post.all.order('created_at DESC')
+    @posts = Post.select('posts.*,
+      (SELECT COUNT(comments.id)
+      FROM comments WHERE comments.post_id = posts.id)
+      AS comment_count')
+                 .joins(:user).order('created_at DESC')
+
     @post = current_user.posts.new(post_params)
 
     if @post.save
