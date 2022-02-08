@@ -12,13 +12,13 @@
       <% if local_assigns[:links] %>
         <div class="flex flex-row justify-between">
           <ul class="flex flex-row w-full align-middle text-sm">
-            <li class=""><%= button_to 'view', comment, method: :get %></li>
+            <li class=""><%= button_to 'view', [comment.post, comment], method: :get %></li>
             <% if user_signed_in? %>
-              <li class="ml-2"><%= button_to 'reply', comment, method: :get %></li>
+              <li class="ml-2"><%= button_to 'reply', [comment.post, comment], method: :get %></li>
             <% end %>
             <% if user_signed_in? && current_user.id == comment.user_id %>
-              <li class=" ml-2"><%= button_to 'edit', edit_comment_url(comment), method: :get %></li>
-              <li class=" ml-2"><%= button_to 'delete', comment, method: :delete %></li>
+              <li class=" ml-2"><%= button_to 'edit', [:edit, comment.post, comment], method: :get %></li>
+              <li class=" ml-2"><%= button_to 'delete', [comment.post, comment], method: :delete %></li>
             <% end %>
           </ul>
         </div>

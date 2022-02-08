@@ -10,10 +10,22 @@ class Comment < ApplicationRecord
   validates :post_id, presence: true
   validates :body, presence: true
 
-  def child_count
-    # return 0 if comments.empty?
+  def root?
+    parent == post
+  end
 
-    # comments.count + comments.map(&:child_count).sum
-    0
+  def path_parent
+    root? ? parent : [post, parent]
+  end
+
+  def path_self
+    [post, self]
+  end
+
+  def self.create_new_comment(request)
+    url_vars = request.path.split('/')
+    resource, id = url_vars[4] ? url_vars[3, 4] : url_vars[1, 2]
+    parent = resource.singularize.classify.constantize.find(id)
+    parent.comments.build(post_id: parent.post_id)
   end
 end

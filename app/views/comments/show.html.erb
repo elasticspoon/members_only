@@ -8,12 +8,12 @@
   <div class="bg-yellow-300 flex flex-col px-10 py-2 sm:mx-4 sm:rounded-b-lg sm:text-center">
     <div class="">You are viewing a single comment's thread.</div>
     <ul class='flex flex-row underline'>
-      <li class='mr-4'><%= link_to 'view post', post_path(@comment.post) %></li>
-      <li class='mr-4'><%= link_to 'view parent', @comment.parent %></li>
+      <li class='mr-4'><%= link_to 'view post', @comment.post %></li>
+      <li class='mr-4'><%= link_to 'view parent', @comment.path_parent %></li>
     </ul>
   </div>
   <%= render @comment, parent: true %>
-  <%= render 'submit', parent: @comment if user_signed_in? %>
+  <%= render 'submit', resource: @new_comment if user_signed_in? %>
   <%= render 'posts/submit_new_user' unless user_signed_in? %>
   <% if @comment.comments.empty? %>
     <%= render 'comments/no_comments' %>

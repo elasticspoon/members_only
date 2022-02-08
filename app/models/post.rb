@@ -9,4 +9,16 @@ class Post < ApplicationRecord
     Post.select('posts.*, (SELECT COUNT(comments.id) FROM comments WHERE comments.post_id = posts.id) AS comment_count')
         .joins(:user).order('created_at DESC')
   end
+
+  def post_id
+    id
+  end
+
+  def path_parent
+    self
+  end
+
+  def path_self
+    self
+  end
 end

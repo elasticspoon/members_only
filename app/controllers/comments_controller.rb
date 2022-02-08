@@ -1,18 +1,21 @@
 class CommentsController < ApplicationController
   before_action :find_comment, only: %i[destroy edit show update]
   before_action :authenticate_user!, except: %i[index show]
+  before_action :create_comment, only: %i[show create]
 
   def edit; end
 
   def update
     if @comment.update(comment_params)
-      redirect_to comment_path(@comment), notice: 'Comment edited succesfully!'
+      redirect_to @comment.path_parent, notice: 'Comment edited succesfully!'
     else
       render action: 'edit', status: :unprocessable_entity
     end
   end
 
-  def show; end
+  def show
+    logger.debug @new_comment.attributes.inspect.to_s
+  end
 
   def destroy
     post = @comment.post
@@ -21,18 +24,19 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @comment = Comment.new(comment_params)
-    @comment[:user_id] = current_user.id
+    @new_comment[:user_id] = current_user.id
 
-    if @comment.save
-      s_notice = 'Comment created succesfully!'
-      return redirect_to post_path(@comment.parent), notice: s_notice if @comment.parent.is_a?(Post)
+    if @new_comment.update(comment_params)
+      redirect_to @new_comment.path_parent, notice: 'Comment created succesfully!'
 
-      redirect_to comment_path(@comment.parent), notice: s_notice
     else
-      flash[:alert] = @comment.errors.full_messages
-      render @comment.parent, status: :unprocessable_entity
+      flash[:alert] = @new_comment.errors.full_messages
+      render @new_comment.path_parent, status: :unprocessable_entity
     end
+  end
+
+  def index
+    redirect_to post_path(params[:post_id])
   end
 
   private
@@ -42,6 +46,12 @@ class CommentsController < ApplicationController
   end
 
   def comment_params
-    params.require(:comment).permit(:body, :parent_id, :parent_type, :post_id)
+    params.require(:comment).permit(:body)
+  end
+
+  def create_comment
+    return unless user_signed_in?
+
+    @new_comment = Comment.create_new_comment(request)
   end
 end
