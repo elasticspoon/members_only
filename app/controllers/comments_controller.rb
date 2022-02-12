@@ -13,9 +13,7 @@ class CommentsController < ApplicationController
     end
   end
 
-  def show
-    logger.debug @new_comment.attributes.inspect.to_s
-  end
+  def show; end
 
   def destroy
     post = @comment.post
@@ -42,7 +40,7 @@ class CommentsController < ApplicationController
   private
 
   def find_comment
-    @comment = Comment.find(params[:id])
+    @comment = Comment.includes(:comments, :user, :post, :parent).find(params[:id])
   end
 
   def comment_params

@@ -9,7 +9,7 @@
       <div class="flex flex-row justify-between ml-2">
         <ul class="flex flex-row w-full align-middle text-sm">
           <li class="w-fit underline">
-            <%= button_to post.comment_count.to_s + ' comments', post, method: :get, class: 'underline text-sm' %>
+            <%= button_to (post.comments_count || 0).to_s + ' comments', post, method: :get, class: 'underline text-sm' %>
           </li>
           <li class=" ml-2"><%= button_to 'view', post, method: :get %></li>
           <li class=" ml-2"><%= button_to 'share', post, method: :get %></li>
